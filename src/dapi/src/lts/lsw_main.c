@@ -126,6 +126,8 @@ LTS_T   Lts_t;
 #endif
 #if defined (__APPLE__)
 #include <limits.h>
+#include <stdint.h>
+#include <sys/types.h>
 #endif
 
 #ifdef WIN32
