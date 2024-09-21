@@ -176,7 +176,7 @@ OP_THREAD_ROUTINE( cmd_main, LPTTS_HANDLE_T phTTS )
 	        phTTS->uiThreadError = MMSYSERR_NOMEM;
         else
 		/***************Thread specific structure initialization MVP ***************/
-			if((pCmd_t->cm = (int*)calloc(total_commands,sizeof(int) ))== NULL)
+			if((pCmd_t->cm = (short int*)calloc(total_commands,sizeof(int) ))== NULL)
 				phTTS->uiThreadError = MMSYSERR_NOMEM;
 #ifdef ESCAPE_SEQ
 			else

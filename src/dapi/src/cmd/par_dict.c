@@ -67,10 +67,10 @@
 #include "par_def.h"
 #include "tts.h"
 #include <stdio.h> // NAL warning removal
+#include <string.h>
 
 #if defined ARM7 || defined __EMSCRIPTEN__ || defined (__APPLE__)
 #include "stdlib.h"
-#include "string.h"
 #endif
 
  

@@ -1750,7 +1750,7 @@ typedef struct tagLLFrame {
 	  pVtm_t->dwSyncParams[1] = phTTS->dwQueuedSampleCount;
 		  OP_UnlockMutex( phTTS->pcsQueuedSampleCount );
 
-	  write_pipe( pKsd_t->sync_pipe, pVtm_t->dwSyncParams, 2 );
+	  write_pipe( pKsd_t->sync_pipe, (unsigned char*)pVtm_t->dwSyncParams, 2 );
 #ifdef TYPING_MODE
 	  }
 #endif //TYPING_MODE
@@ -2003,7 +2003,7 @@ typedef struct tagLLFrame {
 		 write_pipe( pKsd_t->sync_pipe, pVtm_t->dwSyncParams, 4 );
 	  }
 #else // USE_BOOKMARKS_FOR_SYNC
-	  write_pipe( pKsd_t->sync_pipe, pVtm_t->dwSyncParams, 4 );
+	  write_pipe( pKsd_t->sync_pipe, (unsigned char*)pVtm_t->dwSyncParams, 4 );
 #endif //USE_BOOKMARKS.
 	  break;
 
@@ -2765,7 +2765,7 @@ void SendVisualNotification(LPTTS_HANDLE_T phTTS, DWORD dwPhoneme, DWORD dwDurat
 		dwSyncParams[2]=(DWORD)((((QWORD)(pvdPacket)) & 0xFFFFFFFF00000000) >> 32);
 		dwSyncParams[3]=(DWORD)(((QWORD)(pvdPacket)) & 0x00000000FFFFFFFF);
 #endif
-		write_pipe(pKsd_t->sync_pipe, dwSyncParams,4);
+		write_pipe(pKsd_t->sync_pipe, (unsigned char*)dwSyncParams,4);
 		
 	}
 	

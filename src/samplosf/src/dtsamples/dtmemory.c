@@ -95,9 +95,6 @@
 #if defined __linux__ || defined _SPARC_SOLARIS_ || defined (__APPLE__)
 #include <stdlib.h> /* for atoi(), malloc() */
 #include <unistd.h> /* for sleep() */
-#endif
-
-#if defined (__APPLE__)
 #include <string.h> 
 #endif
 

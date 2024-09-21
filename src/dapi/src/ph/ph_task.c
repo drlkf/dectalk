@@ -152,9 +152,6 @@
 
 #if defined __linux__ || defined VXWORKS || defined _SPARC_SOLARIS_ || defined ARM7 || defined __EMSCRIPTEN__ || defined (__APPLE__)
 #include <stdlib.h>
-#endif
-
-#if defined (__APPLE__)
 #include <string.h>
 #endif
 

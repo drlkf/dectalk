@@ -766,7 +766,7 @@ MMRESULT TextToSpeechStartup(LPTTS_HANDLE_T *a, UINT b, DWORD c, VOID (*d)(LONG,
 	*b = (LPTTS_HANDLE_T)handle;
 	lang = find_pid(GetCurrentProcessId());
 #else
-	*a = handle;
+	*a = (LPTTS_HANDLE_T)handle;
 	lang = find_pid(_getpid());
 #endif
 

@@ -198,13 +198,13 @@ OP_THREAD_ROUTINE(sync_main, LPTTS_HANDLE_T phTTS)
 
   for(;;)
   {
-	read_pipe( pKsd_t->sync_pipe, &control, 1 );
+	read_pipe( pKsd_t->sync_pipe, (unsigned char*)&control, 1 );
 
 	switch ( control )
 	{
 	case SPC_type_sync:
 
-	read_pipe( pKsd_t->sync_pipe, dwSyncParams, 1 );
+	read_pipe( pKsd_t->sync_pipe, (unsigned char*)dwSyncParams, 1 );
 
 #ifdef TYPING_MODE
 	// never wait for the sample to play when we're in typing mode..
@@ -240,7 +240,7 @@ OP_THREAD_ROUTINE(sync_main, LPTTS_HANDLE_T phTTS)
 	case SPC_type_visual: // tek 27aug97
 		// this is a lot like the index types below, but that was getting so 
 		// cluttered that I put it in a separate case arm. 
-		read_pipe( pKsd_t->sync_pipe, dwSyncParams, 3 );  // get the rest of the pkt
+		read_pipe( pKsd_t->sync_pipe, (unsigned char*)dwSyncParams, 3 );  // get the rest of the pkt
 //#ifdef WIN32 // tek 08jan98 we only process these for WIN32 for now.
 		// wait for it to play
 		if (dwSyncParams[2]) //toss nulls
@@ -389,7 +389,7 @@ OP_THREAD_ROUTINE(sync_main, LPTTS_HANDLE_T phTTS)
 	// tek 15aug97 these are now all changed to always either process the
 	// mark or free the contained memory,
 
-	read_pipe( pKsd_t->sync_pipe, dwSyncParams, 3 );
+	read_pipe( pKsd_t->sync_pipe, (unsigned char*)dwSyncParams, 3 );
 
 
 	  /************************************************************/

@@ -1262,7 +1262,7 @@ void register_word_part(WalkCNTXT *cntxt, GERLETTER *name, U16 from, U16 to, BOO
     }
 }
   
-void split_inline_morph_phonemes(const GERLETTER *name, int *comparelength, int *phonestart, int *phonelength, U16 *rule)
+void split_inline_morph_phonemes(const GERLETTER *name, S16 *comparelength, S16 *phonestart, S16 *phonelength, U16 *rule)
      /* This special cludge function applies to strings in the form "ed @d 1" where ed is a compare
 	string, @d is a phoneme string and 1 is a rule number. We want to know how many 
 	characters are in the compare string, where the phoneme string begins, and how long it is,

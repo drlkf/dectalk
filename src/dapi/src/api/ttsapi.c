@@ -3834,7 +3834,7 @@ static void DeleteTextToSpeechObjects( LPTTS_HANDLE_T phTTS )
 		if ( phTTS->hThread_SYNC != NULL )
 		{
 			exit_pipe( pKsd_t->sync_pipe );
-			write_pipe( pKsd_t->sync_pipe, dwDump, 3 );
+			write_pipe( pKsd_t->sync_pipe, (unsigned char*)dwDump, 3 );
 #ifdef WIN32
 			WaitForSingleObject( phTTS->hThread_SYNC,
 				TIMEOUT_INTERVAL_IN_MSEC );
@@ -7922,7 +7922,7 @@ MMRESULT TextToSpeechAddBuffer( LPTTS_HANDLE_T phTTS,
 		return( MMSYSERR_ERROR );
 	}
 
-	write_pipe( phTTS->pKernelShareData->buffer_pipe, pPipeArray, 1 );
+	write_pipe( phTTS->pKernelShareData->buffer_pipe, (unsigned char*)pPipeArray, 1 );
 	uiI = pipe_count( phTTS->pKernelShareData->buffer_pipe );
 #ifdef WIN32
 #ifdef API_DEBUG
@@ -8579,7 +8579,7 @@ static LPTTS_BUFFER_T GetBuffer( LPTTS_HANDLE_T phTTS )
 	LPTTS_BUFFER_T pTTS_BufferArray[1];  /*MVP : Not a static */
 	LPTTS_BUFFER_T pTTS_Buffer;              /*MVP : Not a static */
 	
-	read_pipeEx( &(phTTS->pKernelShareData->buffer_pipe), &pTTS_BufferArray[0], 1 );
+	read_pipeEx( &(phTTS->pKernelShareData->buffer_pipe), (unsigned char*)&pTTS_BufferArray[0], 1 );
 	
 	pTTS_Buffer = pTTS_BufferArray[0];
 	
@@ -8822,16 +8822,16 @@ void ReturnRemainingBuffers( LPTTS_HANDLE_T phTTS )
 	
 	while (pipe_count( phTTS->pKernelShareData->buffer_pipe )  && phTTS->dwOutputState == STATE_OUTPUT_MEMORY)
 	{
-		read_pipeEx( &(phTTS->pKernelShareData->buffer_pipe), &pPipeArray, 1 );
+		read_pipeEx( &(phTTS->pKernelShareData->buffer_pipe), (unsigned char*)&pPipeArray, 1 );
 //#ifdef WIN32
-		write_pipe(phTTS->pKernelShareData->buffer_delay_pipe, pPipeArray, 1 );
+		write_pipe(phTTS->pKernelShareData->buffer_delay_pipe, (unsigned char*)pPipeArray, 1 );
 	}
 //	OP_UnlockMutex(phTTS->pcsBufferPipe);
 	//UnlockPipe(phTTS->pKernelShareData->buffer_pipe);
 	
 	while (pipe_count( phTTS->pKernelShareData->buffer_delay_pipe ) && phTTS->dwOutputState == STATE_OUTPUT_MEMORY)
 	{
-		read_pipeEx( &(phTTS->pKernelShareData->buffer_delay_pipe), &pPipeArray, 1 );
+		read_pipeEx( &(phTTS->pKernelShareData->buffer_delay_pipe), (unsigned char*)&pPipeArray, 1 );
 		
 //#endif
 //#if defined __osf__ || defined __linux__ || defined VXWORKS

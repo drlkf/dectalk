@@ -7,7 +7,7 @@
 #endif
 #include	"csn.h"
 
-#if defined (__APPLE__)
+#if defined __osf__ || defined __linux__ || defined VXWORKS || defined _SPARC_SOLARIS_ || defined __EMSCRIPTEN__ || defined (__APPLE__)
 #include <ctype.h>
 #endif
 

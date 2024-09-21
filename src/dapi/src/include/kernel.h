@@ -468,8 +468,8 @@ struct dtpc_language_tables {
 	unsigned char _far *                    lang_arpabet;
 	int                                     lang_arpa_size;
 	int                                     lang_arpa_case;
-	unsigned char _far *    _far *          lang_typing;
-	unsigned char _far *    _far *          lang_error;
+	const unsigned char _far *    _far *    lang_typing;
+	const unsigned char _far *    _far *    lang_error;
 };
 
 #define NULL_CP ((struct dtpc_code_pages _far *)0L)
@@ -815,8 +815,8 @@ volatile int iSwVolume;
 	volatile unsigned char _far *				arpabet;
 	volatile int								arpa_size;
 	volatile int								arpa_case;
-	volatile unsigned char _far * _far *		typing_table;
-	volatile unsigned char _far *   _far *		error_table;
+	volatile const unsigned char _far * _far *		typing_table;
+	volatile const unsigned char _far *   _far *		error_table;
 	
 #ifdef DTPC2
 /* images of read-only registers */
