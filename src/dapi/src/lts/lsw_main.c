@@ -128,6 +128,7 @@ LTS_T   Lts_t;
 #include <limits.h>
 #include <stdint.h>
 #include <sys/types.h>
+#include <mach-o/dyld.h>
 #endif
 
 #ifdef WIN32
