@@ -69,8 +69,11 @@
 #include <strings.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>   
+#include <unistd.h>
 
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
 
 #define NUM_LANGS           6
 

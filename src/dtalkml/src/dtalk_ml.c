@@ -114,6 +114,9 @@ _CRTIMP wchar_t __cdecl towupper(wchar_t);
 #include <linux/limits.h>
 #elif defined (__APPLE__)
 #include <limits.h>
+#include <stdint.h>
+#include <sys/types.h>
+#include <mach-o/dyld.h>
 #endif
 #include <libgen.h>
 #endif // linux

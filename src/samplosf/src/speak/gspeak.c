@@ -56,6 +56,10 @@ TODO:
 #include <locale.h>
 #endif
 
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+
 #define ZERO            0
 #define SPEAKING_VOICES 9
 #define NUM_LANGS       6
