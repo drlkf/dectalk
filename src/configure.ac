@@ -200,7 +200,7 @@ esac
 AC_SUBST(PH_VTM_OPTO_FLAGS)dnl
 
 dnl the dictionary compiler must be built for host not target
-DIC_CC="gcc"
+DIC_CC="${CC}"
 case "$target" in
 	sparc-sun-*) DIC_CC="gcc" ;;
 	alpha-dec-osf*) DIC_CC="cc" ;;
