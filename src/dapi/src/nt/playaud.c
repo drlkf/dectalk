@@ -5934,7 +5934,7 @@ static MMRESULT OpenWaveOutputDevice( HPLAY_AUDIO_T pPlayAudio )
     mmStatus = waveOutOpen( &(pPlayAudio->hWaveOut),
                             pPlayAudio->uiSelectedDeviceID,
                             (LPWAVEFORMATEX)pWaveFormat,
-                            (DWORD)WaveOutCallbackRoutine,
+                            WaveOutCallbackRoutine,
                             (DWORD)pPlayAudio,
                             dwOpenFlags ))
 #endif
@@ -5997,7 +5997,7 @@ static MMRESULT OpenWaveOutputDevice( HPLAY_AUDIO_T pPlayAudio )
       mmStatus = waveOutOpen( &(pPlayAudio->hWaveOut),
                               pPlayAudio->uiSelectedDeviceID,
                               (LPWAVEFORMATEX)pWaveFormat,
-                              (DWORD)WaveOutCallbackRoutine,
+                              WaveOutCallbackRoutine,
                               (DWORD)pPlayAudio,
                               dwOpenFlags ))
 #endif
