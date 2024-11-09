@@ -163,6 +163,7 @@
 #if defined __linux__ || defined VXWORKS || defined __sparc || defined __EMSCRIPTEN__ || defined (__APPLE__)
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 #endif
 #ifdef __osf__
 #include <mme/mmsystem.h>
@@ -177,6 +178,7 @@
 #include <langinfo.h>
 #include <iconv.h>
 #include <locale.h>
+#include <wchar.h>
 #endif
 
 #define REALLOC_SIZE 4096
@@ -199,9 +201,7 @@ iconv_t cd;
   */
 MMRESULT OpenOutputWaveFile( char * fname, int encoding );
 MMRESULT CloseOutputWaveFile( );
-#if defined __linux__ || defined _SPARC_SOLARIS_ || defined __EMSCRIPTEN__ || defined (__APPLE__)
-int play_file( char *file_name, int isAPipe, int clauseMode );
-#endif
+int play_file( char *file_name, int isAPipe, int clauseMode, int typingMode );
 #ifdef HAVE_ICONV
 char *convert_string_for_dapi(char *in, size_t inlen);
 #endif
@@ -277,6 +277,7 @@ static void usage(char *progname)
     fprintf(stderr," * clause: Output is produced/queued on clause end (with delimiters like\n");
     fprintf(stderr,"           period (.) or comma (,)) or when the force-character ^K is\n");
     fprintf(stderr,"           received.\n");
+    fprintf(stderr,"           Run 'stty -icanon' to disable line buffering for hw dectalk behaviour.\n");
     fprintf(stderr,"           Playing output continues. Output is always produced on EOF.\n\n");
     fprintf(stderr,"Input/mode switch table:\n");
     fprintf(stderr,"       | typing | line | clause\n");
@@ -320,8 +321,6 @@ static void usage(char *progname)
 
 int main( int argc, char *argv[] )
 {
-    char *buf;
-    int buf_len = 0;
     char cli_text[4096];
     unsigned int  devNo = WAVE_MAPPER;
     int  userSelectedDevice = 0;
@@ -333,10 +332,8 @@ int main( int argc, char *argv[] )
     int isAPipe = FALSE;
     int clauseMode = FALSE;
     int cli_len;
-    int text_len;
     int status;
     DWORD devOptions = 0;
-    DWORD TempDevOptions = 0;
     DWORD dwFlags;
     DWORD TempEncoding = 0;
     DWORD encoding = 0;
@@ -718,73 +715,15 @@ int main( int argc, char *argv[] )
        /**********************************************/
        /* Play from stdin         		     */
        /**********************************************/
-       play_file( "", isAPipe, clauseMode );
+       play_file( "", isAPipe, clauseMode, 0 );
     }
 
     else if ( file_arg_index == (-1) && cli_len == 0 )
     {
-        int read_bytes = 0;
-        /*******************************************************/
-        /* Read and play 256 bytes at a time until out of data */
-        /*******************************************************/
-        dwFlags = TTS_FORCE;
-        buf = malloc(REALLOC_SIZE*sizeof(char));
-        if (buf == NULL) {
-                fprintf(stderr, "Can't allocate memory!\n");
-                return(0);
-        }
-        buf_len = REALLOC_SIZE;
-        memset(buf, 0, buf_len);
-
-
-        while(fgets( buf + read_bytes, buf_len-read_bytes-1, stdin ) || read_bytes)
-        {
-	   char *play_buf = buf;
-           int nbytes;
-
-	   nbytes = strlen(buf + read_bytes);
-           if (nbytes == buf_len-read_bytes-2 && buf[buf_len-3] != '\n') {
-             char *tmpbuf;
-
-             buf_len += REALLOC_SIZE;
-             tmpbuf = realloc(buf, buf_len*sizeof(char));
-             if (tmpbuf == NULL) {
-                 fprintf(stderr, "Can't allocate memory!\n");
-                 free(buf);
-                 return(0);
-             }
-             buf = tmpbuf;
-
-             read_bytes += nbytes;
-
-             memset(buf + read_bytes, 0, buf_len-read_bytes);
-             continue;
-           }
-           play_buf = buf;
-#ifdef HAVE_ICONV
-           play_buf = convert_string_for_dapi(play_buf, strlen(play_buf));
-#endif
-           text_len = strlen( play_buf );
-	   if (text_len==2)
-	   {
-	     TextToSpeechTyping(ttsHandle,play_buf[0]);
-	   }
-	   else
-	   {
-             TextToSpeechReset(ttsHandle,FALSE);
-	     if (TextToSpeechSpeak(ttsHandle, play_buf, dwFlags) != MMSYSERR_NOERROR )
-	     {
-	         fprintf(stderr,"Error writing %d bytes to TextToSpeech.\n",
-                                      text_len);
-	         break;
-	     }
-           }
-           read_bytes = 0;
-           memset(buf, 0, buf_len);
-#ifdef HAVE_ICONV
-           free(play_buf);
-#endif
-	}
+       /**********************************************/
+       /* Typing mode                                */
+       /**********************************************/
+       play_file( "", TRUE, 0, 1 );
     }
 
     /***********************************************/
@@ -822,11 +761,7 @@ int main( int argc, char *argv[] )
           /**********************************************/
           /* Play the specified file 			*/
           /**********************************************/
-#if defined __linux__ || defined VXWORKS || defined _SPARC_SOLARIS_ || defined __EMSCRIPTEN__ || defined (__APPLE__)
-	  play_file( argv[file_arg_index], 0, clauseMode );
-#else
-	  play_file( argv[file_arg_index] );
-#endif
+	  play_file( argv[file_arg_index], 0, clauseMode, 0 );
         }
     }
 
@@ -887,7 +822,7 @@ int main( int argc, char *argv[] )
 **   int - Total number of bytes of text played back.
 **
 *****************************************************************************/
-int play_file( char *file_name, int isAPipe, int clauseMode )
+int play_file( char *file_name, int isAPipe, int clauseMode, int typingMode )
 {
     FILE *fileHandle;
     int  nbytes;
@@ -916,43 +851,103 @@ int play_file( char *file_name, int isAPipe, int clauseMode )
     {
        int read_bytes = 0;
 
-       while(fgets( buf + read_bytes, buf_len-read_bytes-1, stdin ) || read_bytes)
-       {
-          nbytes = strlen(buf + read_bytes);
-          if (nbytes == buf_len-read_bytes-2 && buf[buf_len-3] != '\n') {
-            char *tmpbuf;
-
-            buf_len += REALLOC_SIZE;
-            tmpbuf = realloc(buf, buf_len*sizeof(char));
-            if (tmpbuf == NULL) {
-                fprintf(stderr, "Can't allocate memory!\n");
-                free(buf);
-                return(0);
-            }
-            buf = tmpbuf;
-
-            read_bytes += nbytes;
-
-            memset(buf + read_bytes, 0, buf_len-read_bytes);
-            continue;
-          }
-          play_buf = buf;
+       if(clauseMode) {
 #ifdef HAVE_ICONV
-          play_buf = convert_string_for_dapi(play_buf, strlen(play_buf));
+          wint_t c;
+          mbstate_t ps = { 0 };
+#else
+          int c;
 #endif
-          text_len = strlen( play_buf );
+          char c_buf[16] = { 0 };
 
-          if ((value=TextToSpeechSpeak( ttsHandle, play_buf, dwFlags)) != MMSYSERR_NOERROR  )
+          while(1) {
+             memset(c_buf, 0, sizeof(c_buf));
+#ifdef HAVE_ICONV
+             errno = 0;
+             c = getwchar();
+             if (c == WEOF) {
+                if (errno == EILSEQ) {
+                   continue;
+                }
+                break;
+             }
+             if (wcrtomb(c_buf, c, &ps) == 0) {
+                continue;
+             }
+#else
+             c = getchar();
+             if (c == EOF) {
+                break;
+             }
+             c_buf[0] = c;
+#endif
+             if (feof(stdin)) {
+               break;
+             }
+   
+             play_buf = c_buf;
+#ifdef HAVE_ICONV
+             play_buf = convert_string_for_dapi(play_buf, strlen(play_buf));
+#endif
+             text_len = strlen( play_buf );
+   
+             if ((value=TextToSpeechSpeak( ttsHandle, play_buf, dwFlags)) != MMSYSERR_NOERROR  )
+             {
+                fprintf(stderr,"Error writing %d bytes to TextToSpeech 1 with code %d.\n",text_len,value);
+                break;
+             }
+   
+             total_bytes += text_len;
+#ifdef HAVE_ICONV
+             free(play_buf);
+#endif
+          }
+       } else {
+          while(fgets( buf + read_bytes, buf_len-read_bytes-1, stdin ) || read_bytes)
           {
-             fprintf(stderr,"Error writing %d bytes to TextToSpeech 1 with code %d.\n",text_len,value);
-             break;
-          }
-          total_bytes += text_len;
-          read_bytes = 0;
-          memset(buf, 0, buf_len);
+             nbytes = strlen(buf + read_bytes);
+             if (nbytes == buf_len-read_bytes-2 && buf[buf_len-3] != '\n') {
+               char *tmpbuf;
+   
+               buf_len += REALLOC_SIZE;
+               tmpbuf = realloc(buf, buf_len*sizeof(char));
+               if (tmpbuf == NULL) {
+                   fprintf(stderr, "Can't allocate memory!\n");
+                   free(buf);
+                   return(0);
+               }
+               buf = tmpbuf;
+   
+               read_bytes += nbytes;
+   
+               memset(buf + read_bytes, 0, buf_len-read_bytes);
+               continue;
+             }
+             play_buf = buf;
 #ifdef HAVE_ICONV
-          free(play_buf);
+             play_buf = convert_string_for_dapi(play_buf, strlen(play_buf));
 #endif
+             text_len = strlen( play_buf );
+   
+             if (typingMode && text_len==2)
+             {
+                TextToSpeechTyping(ttsHandle,play_buf[0]);
+             } else {
+                if (typingMode)
+                   TextToSpeechReset(ttsHandle,FALSE);
+                if ((value=TextToSpeechSpeak( ttsHandle, play_buf, dwFlags)) != MMSYSERR_NOERROR  )
+                {
+                   fprintf(stderr,"Error writing %d bytes to TextToSpeech 1 with code %d.\n",text_len,value);
+                   break;
+                }
+             }
+             total_bytes += text_len;
+             read_bytes = 0;
+             memset(buf, 0, buf_len);
+#ifdef HAVE_ICONV
+             free(play_buf);
+#endif
+          }
        }
        /******************************************************/
        /* Let's make sure that all the text has been spoken. */
@@ -975,7 +970,7 @@ int play_file( char *file_name, int isAPipe, int clauseMode )
     }
 
     /***********************************************/
-    /* Read 4096 bytes and playback until EOF	   */
+    /* Read file into memory and playback          */
     /***********************************************/
     while( ( nbytes = fread( buf + total_bytes, 1, buf_len-total_bytes-1, fileHandle ) ) > 0 )
     {
