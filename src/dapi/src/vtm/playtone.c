@@ -201,6 +201,15 @@ BOOL PlayTones( LPTTS_HANDLE_T phTTS,
   double Phase_1;
   DWORD dwDurationInFrames;
   PKSD_T pKsd_t = phTTS->pKernelShareData;
+
+#ifdef SOFTWARE_VOLUME
+  if (pKsd_t->iSwVolume < 0) {
+    // Convert dB to power
+    Amp_0 *= pow(10, (pKsd_t->iSwVolume/10.0));
+    Amp_1 *= pow(10, (pKsd_t->iSwVolume/10.0));
+  }
+#endif
+
   /********************************************************************/
   /*  Calculate the duration in frames.                               */
   /********************************************************************/
