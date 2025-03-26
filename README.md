@@ -34,9 +34,10 @@ apt-get install build-essential libasound2-dev libpulse-dev libgtk2.0-dev unzip 
 </details>
 <details>
 <summary>Compiling on Linux</summary>
-make sure you have the autoconf, automake, and gcc packages installed
   
 ```sh
+# make sure you have the autoconf, automake, and gcc packages installed before proceeding
+
 # Run all these commands in the /src directory...
 cd src
 
