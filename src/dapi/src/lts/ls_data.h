@@ -231,8 +231,8 @@ typedef struct LTS_TAG
 	short PtPilSauv;  	/* first free in PilSauv */
 	TypTamp Tamp;
 	BYTE F_CodBl;  /* this must be defined before Ph1 and Ph2 */
-	BYTE Ph1 [100];
-	BYTE Ph2 [100];
+	BYTE Ph1 [128];
+	BYTE Ph2 [128];
   	FLAG  contgc;  /* current word is left context for next word */
 #endif
 } LTS_T;
