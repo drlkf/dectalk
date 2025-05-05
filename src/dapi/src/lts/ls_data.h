@@ -225,7 +225,7 @@ typedef struct LTS_TAG
 #endif
 
 #if defined FRENCH || defined EPSON_ARM7
-	char precedent [80]; //contains the preceding word in ascii
+	char precedent [128]; //contains the preceding word in ascii
 	/* left string shorter than the current one */
 	short PilSauv [LgPile];
 	short PtPilSauv;  	/* first free in PilSauv */

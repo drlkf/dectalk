@@ -177,17 +177,18 @@ BYTE Ph2 [100];
 */
 void ls_rule_lts(LPTTS_HANDLE_T phTTS,LETTER *llp, LETTER *rlp, FLAG ContD) 
 {
-	unsigned char precednor [80];
-	unsigned char phrase    [80];
-	unsigned char phrasenor [80];
-	unsigned char suivant   [80];
-	unsigned char phon      [80];
+	unsigned char precednor [128];
+	unsigned char phrase    [128];
+	unsigned char phrasenor [128];
+	unsigned char suivant   [128];
+	unsigned char phon      [128];
 	unsigned char *lph;
 	LETTER *ls1;
 	LETTER *lste;
 	PLTS_T pLts_t = phTTS->pLTSThreadData;
 	lste = ls1 = llp;
 	
+
 	
 	lph = phrase;
 	while (ls1<rlp) 
