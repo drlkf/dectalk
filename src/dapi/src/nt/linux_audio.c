@@ -819,7 +819,7 @@ UINT16 waveOutOpen(LPHWAVEOUT lphWaveOut, UINT16 uDeviceID,
   if (lphWaveOut != NULL) *lphWaveOut = hWaveOut;
   lpDesc = (LPWAVEOPENDESC) hWaveOut;
   if (lpDesc == NULL) return MMSYSERR_NOMEM;
-  lpDesc->hWave = (unsigned long)hWaveOut;
+  lpDesc->hWave = hWaveOut;
   lpDesc->lpFormat = (LPWAVEFORMATEX)lpFormat;  /* should the struct be copied iso pointer? */
   lpDesc->dwCallback = dwCallback;
   lpDesc->dwInstance = dwInstance;
@@ -2887,7 +2887,7 @@ DWORD OSS_wodMessage(void *WOutDev, UINT wMsg, unsigned long dwUser,
  *           CALLBACK_CallDriverCallback
  */
 static LRESULT CallDriverCallback( FARPROC16 proc,
-				   HANDLE16 hDev, UINT16 msg,
+				   HWAVEOUT hDev, UINT16 msg,
 				   DWORD dwUser, LPARAM lp1,
 				   LPARAM lp2 )
 {
@@ -2903,7 +2903,7 @@ const CALLBACKS_TABLE *Callbacks;
 /**************************************************************************
  * 				DriverCallback	[MMSYSTEM.31]
 */
-BOOL16 DriverCallback(void (*dwCallBack)(void *, unsigned int,  unsigned int,  long int,  long int), UINT16 uFlags, HANDLE16 hDev, 
+BOOL16 DriverCallback(void (*dwCallBack)(void *, unsigned int,  unsigned int,  long int,  long int), UINT16 uFlags, HWAVEOUT hDev, 
                              WORD wMsg, DWORD dwUser, long dwParam1, long dwParam2)
 {
   //LPWAVEOPENDESC	lpDesc; // MGS warning removal

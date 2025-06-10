@@ -244,7 +244,7 @@ typedef struct {
 } PCMWAVEFORMAT, *LPPCMWAVEFORMAT;
 
 typedef struct {
-	HWAVE			hWave;
+	HWAVEOUT		hWave;
 	LPWAVEFORMATEX		lpFormat;
 	void (*dwCallback)(void *, unsigned int,  unsigned int,  long int,  long int);
 	DWORD			dwInstance;
@@ -477,7 +477,7 @@ DWORD OSS_wodMessage(void *WOutDev, UINT wMsg, unsigned long dwUser,
 
 typedef LONG LRESULT;
 
-typedef LRESULT (CALLBACK *FARPROC16)();
+typedef LRESULT (CALLBACK *FARPROC16)(void *, unsigned int,  unsigned int,  long int,  long int);
 
 typedef struct
 {
@@ -494,7 +494,7 @@ extern const CALLBACKS_TABLE *Callbacks;
 #define DCB_FUNC32      0x0007             /* (ugly hack) 32-bit FARPROC */
 #define DCB_TYPEMASK    0x0007
 
-BOOL16 DriverCallback(void (*dwCallBack)(void *, unsigned int,  unsigned int, long int, long int), UINT16 uFlags, HANDLE16 hDev, 
+BOOL16 DriverCallback(void (*dwCallBack)(void *, unsigned int,  unsigned int, long int, long int), UINT16 uFlags, HWAVEOUT hDev, 
                              WORD wMsg, DWORD dwUser, long dwParam1, 
 			     long dwParam2);
      
