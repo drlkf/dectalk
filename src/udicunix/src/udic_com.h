@@ -95,7 +95,7 @@ void push_entry(unsigned char c);
 unsigned char non_white();
 unsigned char get_alpha();
 void ReadAndAlphabetize(char *szFilename);
-void scan_entry();
+void scan_entry(char *szIn);
 void sort_entry();
 void scan_error(char *es);
 int legal_alpha(char c);
@@ -105,7 +105,3 @@ struct listup *save_up(struct listup *head,unsigned char *word);
 unsigned char sort_up(unsigned char *word,struct listup *head);
 void write_up(struct listup *head);
 unsigned char *strsave(unsigned char *word);
-
-/* from udic_com.c */
-void scan_entry();
-void sort_entry();

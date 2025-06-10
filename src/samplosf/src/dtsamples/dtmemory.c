@@ -122,8 +122,8 @@ static LPTTS_HANDLE_T ttsHandle;
 /* Callback routine declaration callbacks to trap */
 /* in-line index marks and/or memory buffers.     */
 /**************************************************/
-void DtCallback();
-void (*DtCallbackRoutine)();
+void DtCallback(LONG param1, LONG param2, DWORD user_defined, UINT uiMsg);
+void (*DtCallbackRoutine)(LONG, LONG, DWORD, UINT);
 
 /**************************************************/
 /* Speech buffers passed between DECtalk	  */
@@ -161,11 +161,11 @@ int      TimeOut;
 **
 **************************************************************************/
 
-static void usage()
+static void usage(char *progname)
 {
     fprintf(stderr, "\tdtmemory will read text from a file and create\n"); 
     fprintf(stderr, "\tan audio wave file in .wav format.\n\n");
-    fprintf(stderr, "\tUsage: dtmemory [-h] [-s #] [-r #] [-o file] [file] \n\n");
+    fprintf(stderr, "\tUsage: %s [-h] [-s #] [-r #] [-o file] [file] \n\n", progname);
     fprintf(stderr,"\t-h 	  This help message\n");
     fprintf(stderr,"\t-s #      Speaker number (1-9)\n");
     fprintf(stderr,"\t-r #      Speaking rate ( 50 - 600 )\n");
@@ -531,7 +531,7 @@ int playFile( char *file_name )
 **   None
 **
 ***************************************************************************/
-void DtCallback(LONG param1, LONG param2, LONG user_defined, UINT uiMsg)
+void DtCallback(LONG param1, LONG param2, DWORD user_defined, UINT uiMsg)
 {
    LPTTS_BUFFER_T pCbSpeechBuffer;
    int i;
@@ -539,7 +539,7 @@ void DtCallback(LONG param1, LONG param2, LONG user_defined, UINT uiMsg)
    switch( uiMsg )
    {
    case TTS_MSG_INDEX_MARK:
-        printf(" Main: Encountered index Number : %d", param2);
+        printf(" Main: Encountered index Number : %ld", param2);
         break;
 
    case TTS_MSG_BUFFER:

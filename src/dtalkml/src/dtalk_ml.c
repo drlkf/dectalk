@@ -457,73 +457,73 @@ unsigned int load_dectalk(char *lang)
 	(unsigned int (_cdecl*)())funcs->TextToSpeechVisualMarks = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,TEXT("TextToSpeechVisualMarks"));
 	(unsigned int (_cdecl*)())funcs->TextToSpeechReserved5 = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,TEXT("TextToSpeechReserved5"));
 #else
-	funcs->TextToSpeechStartup = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechStartup");
-	funcs->TextToSpeechShutdown = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechShutdown");
-	funcs->TextToSpeechSpeak = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSpeak");
-	funcs->TextToSpeechPause = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechPause");
-	funcs->TextToSpeechResume = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechResume");
-	funcs->TextToSpeechOpenWaveOutFile = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechOpenWaveOutFile");
-	funcs->TextToSpeechCloseWaveOutFile = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechCloseWaveOutFile");
-	funcs->TextToSpeechGetStatus = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetStatus");
+	funcs->TextToSpeechStartup = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T *, UINT,  DWORD,  VOID (*)(LONG,  LONG,  DWORD,  UINT), LONG))) GetProcAddress(funcs->mod,"TextToSpeechStartup");
+	funcs->TextToSpeechShutdown = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechShutdown");
+	funcs->TextToSpeechSpeak = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, CHAR *, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechSpeak");
+	funcs->TextToSpeechPause = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechPause");
+	funcs->TextToSpeechResume = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechResume");
+	funcs->TextToSpeechOpenWaveOutFile = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, char *, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechOpenWaveOutFile");
+	funcs->TextToSpeechCloseWaveOutFile = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechCloseWaveOutFile");
+	funcs->TextToSpeechGetStatus = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, DWORD *, DWORD *, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechGetStatus");
 	funcs->TextToSpeechReset = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, BOOL))) GetProcAddress(funcs->mod,"TextToSpeechReset");
-	funcs->TextToSpeechSync = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSync");
-	funcs->TextToSpeechGetRate = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetRate");
-	funcs->TextToSpeechSetRate = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSetRate");
-	funcs->TextToSpeechGetSpeaker = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetSpeaker");
-	funcs->TextToSpeechSetSpeaker = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSetSpeaker");
-	funcs->TextToSpeechGetLanguage = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetLanguage");
-	funcs->TextToSpeechSetLanguage = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSetLanguage");
-	funcs->TextToSpeechGetCaps = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetCaps");
-	funcs->TextToSpeechLoadUserDictionary = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechLoadUserDictionary");
-	funcs->TextToSpeechUnloadUserDictionary = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechUnloadUserDictionary");
-	funcs->TextToSpeechOpenInMemory = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechOpenInMemory");
-	funcs->TextToSpeechCloseInMemory = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechCloseInMemory");
-	funcs->TextToSpeechAddBuffer = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechAddBuffer");
-	funcs->TextToSpeechReturnBuffer = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechReturnBuffer");
-	funcs->TextToSpeechOpenLogFile = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechOpenLogFile");
-	funcs->TextToSpeechCloseLogFile = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechCloseLogFile");
-	funcs->TextToSpeechStartupEx = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechStartupEx");
-	funcs->TextToSpeechStartupExFonix = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechStartupExFonix");
+	funcs->TextToSpeechSync = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechSync");
+	funcs->TextToSpeechGetRate = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, DWORD *))) GetProcAddress(funcs->mod,"TextToSpeechGetRate");
+	funcs->TextToSpeechSetRate = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechSetRate");
+	funcs->TextToSpeechGetSpeaker = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, SPEAKER_T *))) GetProcAddress(funcs->mod,"TextToSpeechGetSpeaker");
+	funcs->TextToSpeechSetSpeaker = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, SPEAKER_T))) GetProcAddress(funcs->mod,"TextToSpeechSetSpeaker");
+	funcs->TextToSpeechGetLanguage = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, LANGUAGE_T *))) GetProcAddress(funcs->mod,"TextToSpeechGetLanguage");
+	funcs->TextToSpeechSetLanguage = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, LANGUAGE_T))) GetProcAddress(funcs->mod,"TextToSpeechSetLanguage");
+	funcs->TextToSpeechGetCaps = (MMRESULT ((_cdecl*)(TTS_CAPS_T *))) GetProcAddress(funcs->mod,"TextToSpeechGetCaps");
+	funcs->TextToSpeechLoadUserDictionary = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, CHAR *))) GetProcAddress(funcs->mod,"TextToSpeechLoadUserDictionary");
+	funcs->TextToSpeechUnloadUserDictionary = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechUnloadUserDictionary");
+	funcs->TextToSpeechOpenInMemory = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechOpenInMemory");
+	funcs->TextToSpeechCloseInMemory = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechCloseInMemory");
+	funcs->TextToSpeechAddBuffer = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, TTS_BUFFER_T *))) GetProcAddress(funcs->mod,"TextToSpeechAddBuffer");
+	funcs->TextToSpeechReturnBuffer = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, TTS_BUFFER_T **))) GetProcAddress(funcs->mod,"TextToSpeechReturnBuffer");
+	funcs->TextToSpeechOpenLogFile = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, CHAR *, DWORD))) GetProcAddress(funcs->mod,"TextToSpeechOpenLogFile");
+	funcs->TextToSpeechCloseLogFile = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechCloseLogFile");
+	funcs->TextToSpeechStartupEx = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T*, UINT,  DWORD,  VOID (*)(LONG,  LONG,  DWORD,  UINT), LONG))) GetProcAddress(funcs->mod,"TextToSpeechStartupEx");
+	funcs->TextToSpeechStartupExFonix = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T*, UINT,  DWORD,  VOID (*)(LONG,  LONG,  DWORD,  UINT), LONG,  char *))) GetProcAddress(funcs->mod,"TextToSpeechStartupExFonix");
 
 	// CAB	Removed warnings 6/24/02
-	funcs->TextToSpeechControlPanel = (VOID ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechControlPanel");
+	funcs->TextToSpeechControlPanel = (VOID ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechControlPanel");
 
-	funcs->TextToSpeechVersion = (ULONG ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechVersion");
+	funcs->TextToSpeechVersion = (ULONG ((_cdecl*)(CHAR **))) GetProcAddress(funcs->mod,"TextToSpeechVersion");
 	// CAB	Removed warnings 6/24/02
 	funcs->TextToSpeechTyping = (VOID ((_cdecl*)(LPTTS_HANDLE_T, unsigned char))) GetProcAddress(funcs->mod,"TextToSpeechTyping");
 
-	funcs->TextToSpeechGetLastError = (ULONG ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetLastError");
+	funcs->TextToSpeechGetLastError = (ULONG ((_cdecl*)(LPTTS_HANDLE_T))) GetProcAddress(funcs->mod,"TextToSpeechGetLastError");
 	funcs->TextToSpeechReserved1 = (ULONG ((_cdecl*)(unsigned char*, U8, BOOL, BOOL))) GetProcAddress(funcs->mod,"TextToSpeechReserved1");
 	// CAB	Removed warnings 6/24/02
-	funcs->TextToSpeechReserved2 = (ULONG ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechReserved2");
+	funcs->TextToSpeechReserved2 = (ULONG ((_cdecl*)(LPTTS_HANDLE_T, unsigned int *))) GetProcAddress(funcs->mod,"TextToSpeechReserved2");
 
-	funcs->TextToSpeechReserved3 = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechReserved3");
-	funcs->TextToSpeechReserved4 = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechReserved4");
-	funcs->TextToSpeechVersionEx = (ULONG ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechVersionEx");
+	funcs->TextToSpeechReserved3 = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, int,  char *, int))) GetProcAddress(funcs->mod,"TextToSpeechReserved3");
+	funcs->TextToSpeechReserved4 = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, CHAR *))) GetProcAddress(funcs->mod,"TextToSpeechReserved4");
+	funcs->TextToSpeechVersionEx = (ULONG ((_cdecl*)(VERSION_INFO **))) GetProcAddress(funcs->mod,"TextToSpeechVersionEx");
 	// CAB	Removed warnings 6/24/02
 	funcs->TextToSpeechGetFeatures = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetFeatures");
 
-	funcs->TextToSpeechGetSpeakerParams = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetSpeakerParams");
-	funcs->TextToSpeechSetSpeakerParams = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSetSpeakerParams");
+	funcs->TextToSpeechGetSpeakerParams = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, UINT,  struct SPDEFS_TAG **, struct SPDEFS_TAG **, struct SPDEFS_TAG **, struct SPDEFS_TAG **))) GetProcAddress(funcs->mod,"TextToSpeechGetSpeakerParams");
+	funcs->TextToSpeechSetSpeakerParams = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, struct SPDEFS_TAG *))) GetProcAddress(funcs->mod,"TextToSpeechSetSpeakerParams");
 	
 	// CAB	Removed warnings 6/24/02
 	funcs->TextToSpeechDictionaryHit = (int ((_cdecl*)(LPTTS_HANDLE_T, struct dic_entry *))) GetProcAddress(funcs->mod,"TextToSpeechDictionaryHit");
-	funcs->TextToSpeechDumpDictionary = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechDumpDictionary");
+	funcs->TextToSpeechDumpDictionary = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, char *))) GetProcAddress(funcs->mod,"TextToSpeechDumpDictionary");
 	funcs->TextToSpeechUserDictionaryHit = (int ((_cdecl*)(LPTTS_HANDLE_T, struct dic_entry *))) GetProcAddress(funcs->mod,"TextToSpeechUserDictionaryHit");
-	funcs->TextToSpeechDumpUserDictionary = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechDumpUserDictionary");
-	funcs->TextToSpeechAddUserEntry = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechAddUserEntry");
-	funcs->TextToSpeechDeleteUserEntry = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechDeleteUserEntry");
-	funcs->TextToSpeechChangeUserPhoneme = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechChangeUserPhoneme");
-	funcs->TextToSpeechSaveUserDictionary = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSaveUserDictionary");
-	funcs->TextToSpeechConvertToPhonemes = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechConvertToPhonemes");
+	funcs->TextToSpeechDumpUserDictionary = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, char *))) GetProcAddress(funcs->mod,"TextToSpeechDumpUserDictionary");
+	funcs->TextToSpeechAddUserEntry = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, struct dic_entry *))) GetProcAddress(funcs->mod,"TextToSpeechAddUserEntry");
+	funcs->TextToSpeechDeleteUserEntry = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, struct dic_entry *))) GetProcAddress(funcs->mod,"TextToSpeechDeleteUserEntry");
+	funcs->TextToSpeechChangeUserPhoneme = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, struct dic_entry *, unsigned char *))) GetProcAddress(funcs->mod,"TextToSpeechChangeUserPhoneme");
+	funcs->TextToSpeechSaveUserDictionary = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, char *))) GetProcAddress(funcs->mod,"TextToSpeechSaveUserDictionary");
+	funcs->TextToSpeechConvertToPhonemes = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, unsigned char *, DWORD *, DWORD,  unsigned char *, DWORD,  DWORD))) GetProcAddress(funcs->mod,"TextToSpeechConvertToPhonemes");
 	/* MGS added TextToSpeechTuning 12/03/1998 */
-	funcs->TextToSpeechTuning = (DWORD ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechTuning");
+	funcs->TextToSpeechTuning = (DWORD ((_cdecl*)(LPTTS_HANDLE_T, int,  VOID *))) GetProcAddress(funcs->mod,"TextToSpeechTuning");
 	funcs->TextToSpeechGetPhVdefParams = (short *((_cdecl*)(LPTTS_HANDLE_T, UINT))) GetProcAddress(funcs->mod,"TextToSpeechGetPhVdefParams");
 
-	funcs->TextToSpeechSetVolume = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechSetVolume");
-	funcs->TextToSpeechGetVolume = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechGetVolume");
-	funcs->TextToSpeechVisualMarks = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechVisualMarks");
-	funcs->TextToSpeechReserved5 = (MMRESULT ((_cdecl*)())) GetProcAddress(funcs->mod,"TextToSpeechReserved5");
+	funcs->TextToSpeechSetVolume = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, int,  int))) GetProcAddress(funcs->mod,"TextToSpeechSetVolume");
+	funcs->TextToSpeechGetVolume = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, int,  int *))) GetProcAddress(funcs->mod,"TextToSpeechGetVolume");
+	funcs->TextToSpeechVisualMarks = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, int))) GetProcAddress(funcs->mod,"TextToSpeechVisualMarks");
+	funcs->TextToSpeechReserved5 = (MMRESULT ((_cdecl*)(LPTTS_HANDLE_T, CHAR *))) GetProcAddress(funcs->mod,"TextToSpeechReserved5");
 
 	
 #endif // UNDER_CE
