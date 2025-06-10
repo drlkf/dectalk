@@ -256,10 +256,10 @@ unsigned char la_arpa[];
  */
 
 void toAscky();
-void lookupAscky();
+void lookupAscky(unsigned char ph);
 void toArpabet();
-int lookupArpabet();
-void pushEntry();
+int lookupArpabet(unsigned char p1, unsigned char p2);
+void pushEntry(unsigned char c);
 unsigned char nonWhite();
 unsigned char getAlpha();
 int look_for_prefix(char, char);
@@ -571,8 +571,7 @@ void toAscky()
         return;
 }
 
-void lookupAscky(ph)
-unsigned char ph;
+void lookupAscky(unsigned char ph)
 {
 	int	i;	
 
@@ -663,8 +662,7 @@ void toArpabet()
   return;
 }
 
-int lookupArpabet(p1,p2)
-  unsigned char p1,p2;
+int lookupArpabet(unsigned char p1, unsigned char p2)
 {
   int	i;
   int p2bad = 0;
@@ -753,8 +751,7 @@ char c;
 	return(false);
 }
 	
-void pushEntry(c)
-unsigned char c;
+void pushEntry(unsigned char c)
 {
   if(!multi_lang_phon)
     {

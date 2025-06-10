@@ -92,7 +92,7 @@ static LPTTS_HANDLE_T ttsHandle[NUM_LANGS]; /* DECtalk handle */
 void DemoFileOpen();
 #endif
 int PlaySome();
-void index_callback();
+void index_callback(long param1, long param2, DWORD user_defined, UINT uiMsg);
 static int StartPlay(GtkWidget *, gpointer);
 static int PausePlay(GtkWidget *, gpointer);
 void StopPlay(GtkWidget *, gpointer);
@@ -297,34 +297,34 @@ void ShutdownDectalk(void)
 static GtkItemFactoryEntry menu_items[] =
 {
   {"/_File", NULL, NULL, 0, "<Branch>"},
-  {"/File/_New", "<control>N", FileNewCallback, 0, NULL},
-  {"/File/_Open...", "<control>O", FileOpenCallback, 0, NULL},
-  {"/File/S_ave", "<control>S", FileSaveCallback, 0, NULL},
-  {"/File/Save as", NULL, FileSaveAsCallback, 0, NULL},
-  {"/File/_Close", NULL, FileNewCallback, 0, NULL},
+  {"/File/_New", "<control>N", (GtkItemFactoryCallback)FileNewCallback, 0, NULL},
+  {"/File/_Open...", "<control>O", (GtkItemFactoryCallback)FileOpenCallback, 0, NULL},
+  {"/File/S_ave", "<control>S", (GtkItemFactoryCallback)FileSaveCallback, 0, NULL},
+  {"/File/Save as", NULL, (GtkItemFactoryCallback)FileSaveAsCallback, 0, NULL},
+  {"/File/_Close", NULL, (GtkItemFactoryCallback)FileNewCallback, 0, NULL},
   {"/File/sep", NULL, NULL, 0, "<Separator>"},
-  {"/File/_Load User Dictionary...","<control>L", LoadUserDictCallback, 0, NULL},
-  {"/File/_Unload User Dictionary","<control>U", UnloadUserDictCallback, 0, NULL},
+  {"/File/_Load User Dictionary...","<control>L", (GtkItemFactoryCallback)LoadUserDictCallback, 0, NULL},
+  {"/File/_Unload User Dictionary","<control>U", (GtkItemFactoryCallback)UnloadUserDictCallback, 0, NULL},
   {"/File/Convert to Wave File", NULL, NULL, 0, "<Branch>"},
   {"/File/sep", NULL, NULL, 0, "<Separator>"},
-  {"/File/_Quit", "<control>Q", FileQuitCallback, 0, NULL},
-  {"/File/Convert to Wave File/MONO 11.025kHz, 16-Bit", NULL, FileSaveWaveCallback, menu_save1M16 , NULL},
-  {"/File/Convert to Wave File/MONO 11.025kHz, 8-Bit", NULL, FileSaveWaveCallback, menu_save1M08, NULL},
-  {"/File/Convert to Wave File/MONO 8kHz, uLaw", NULL, FileSaveWaveCallback, menu_save08M08, NULL},
+  {"/File/_Quit", "<control>Q", (GtkItemFactoryCallback)FileQuitCallback, 0, NULL},
+  {"/File/Convert to Wave File/MONO 11.025kHz, 16-Bit", NULL, (GtkItemFactoryCallback)FileSaveWaveCallback, menu_save1M16 , NULL},
+  {"/File/Convert to Wave File/MONO 11.025kHz, 8-Bit", NULL, (GtkItemFactoryCallback)FileSaveWaveCallback, menu_save1M08, NULL},
+  {"/File/Convert to Wave File/MONO 8kHz, uLaw", NULL, (GtkItemFactoryCallback)FileSaveWaveCallback, menu_save08M08, NULL},
   {"/_Edit", NULL, NULL, 0, "<Branch>"},
-  {"/Edit/Cut", "<control>X", EditCutCallback, 0, NULL},
-  {"/Edit/Copy", "<control>C", EditCopyCallback, 0, NULL},
-  {"/Edit/Paste", "<control>V", EditPasteCallback, 0, NULL},
+  {"/Edit/Cut", "<control>X", (GtkItemFactoryCallback)EditCutCallback, 0, NULL},
+  {"/Edit/Copy", "<control>C", (GtkItemFactoryCallback)EditCopyCallback, 0, NULL},
+  {"/Edit/Paste", "<control>V", (GtkItemFactoryCallback)EditPasteCallback, 0, NULL},
   {"/Edit/sep", NULL, NULL, 0, "<Separator>"},
-  {"/Edit/_English", NULL, LangMenuSelect, menu_english, NULL},
-  {"/Edit/S_panish", NULL, LangMenuSelect, menu_spanish, NULL},
-  {"/Edit/_German", NULL, LangMenuSelect, menu_german, NULL},
-  {"/Edit/_Latin American", NULL, LangMenuSelect, menu_latin_american, NULL},
-  {"/Edit/English U_K", NULL, LangMenuSelect, menu_british, NULL},
-  {"/Edit/_French", NULL, LangMenuSelect, menu_french, NULL},
+  {"/Edit/_English", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_english, NULL},
+  {"/Edit/S_panish", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_spanish, NULL},
+  {"/Edit/_German", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_german, NULL},
+  {"/Edit/_Latin American", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_latin_american, NULL},
+  {"/Edit/English U_K", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_british, NULL},
+  {"/Edit/_French", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_french, NULL},
   {"/_Help", NULL, NULL, 0, "<LastBranch>"},
-  {"/Help/_Help on DECtalk", "F1", HelpHelpCallback, 0, NULL},
-  {"/Help/About _GSpeak", "F2", HelpAboutCallback, 0, NULL},
+  {"/Help/_Help on DECtalk", "F1", (GtkItemFactoryCallback)HelpHelpCallback, 0, NULL},
+  {"/Help/About _GSpeak", "F2", (GtkItemFactoryCallback)HelpAboutCallback, 0, NULL},
 };
 
 #else
@@ -332,46 +332,46 @@ static GtkItemFactoryEntry menu_items[] =
 static GtkItemFactoryEntry menu_items[] =
 {
   {"/_File/", NULL, NULL, 0, "<Branch>"},
-  {"/File/_New", "<control>N", FileNewCallback, 0, NULL},
-  {"/File/_Open...", "<control>O", FileOpenCallback, 0, NULL},
-  {"/File/S_ave", "<control>S", FileSaveCallback, 0, NULL},
-  {"/File/Save as", NULL, FileSaveAsCallback, 0, NULL},
-  {"/File/_Close", NULL, FileNewCallback, 0, NULL},
+  {"/File/_New", "<control>N", (GtkItemFactoryCallback)FileNewCallback, 0, NULL},
+  {"/File/_Open...", "<control>O", (GtkItemFactoryCallback)FileOpenCallback, 0, NULL},
+  {"/File/S_ave", "<control>S", (GtkItemFactoryCallback)FileSaveCallback, 0, NULL},
+  {"/File/Save as", NULL, (GtkItemFactoryCallback)FileSaveAsCallback, 0, NULL},
+  {"/File/_Close", NULL, (GtkItemFactoryCallback)FileNewCallback, 0, NULL},
   {"/File/sep", NULL, NULL, 0, "<Separator>"},
-  {"/File/_Load User Dictionary...","<control>L", NotAvailableCallback, 0, NULL},
-  {"/File/_Unload User Dictionary","<control>U", NotAvailableCallback, 0, NULL},
+  {"/File/_Load User Dictionary...","<control>L", (GtkItemFactoryCallback)NotAvailableCallback, 0, NULL},
+  {"/File/_Unload User Dictionary","<control>U", (GtkItemFactoryCallback)NotAvailableCallback, 0, NULL},
   {"/File/Convert to Wave File", NULL, NULL, 0, "<Branch>"},
   {"/File/sep", NULL, NULL, 0, "<Separator>"},
-  {"/File/_Quit", "<control>Q", FileQuitCallback, 0, NULL},
-  {"/File/Convert to Wave File/MONO 11.025kHz, 16-Bit", NULL, NotAvailableCallback, 0, NULL},
-  {"/File/Convert to Wave File/MONO 11.025kHz, 8-Bit", NULL, NotAvailableCallback, 0, NULL},
-  {"/File/Convert to Wave File/MONO 8kHz, uLaw", NULL, NotAvailableCallback, 0, NULL},
+  {"/File/_Quit", "<control>Q", (GtkItemFactoryCallback)FileQuitCallback, 0, NULL},
+  {"/File/Convert to Wave File/MONO 11.025kHz, 16-Bit", NULL, (GtkItemFactoryCallback)NotAvailableCallback, 0, NULL},
+  {"/File/Convert to Wave File/MONO 11.025kHz, 8-Bit", NULL, (GtkItemFactoryCallback)NotAvailableCallback, 0, NULL},
+  {"/File/Convert to Wave File/MONO 8kHz, uLaw", NULL, (GtkItemFactoryCallback)NotAvailableCallback, 0, NULL},
   {"/_Edit/", NULL, NULL, 0, "<Branch>"},
-  {"/Edit/Cut", "<control>X", EditCutCallback, 0, NULL},
-  {"/Edit/Copy", "<control>C", EditCopyCallback, 0, NULL},
-  {"/Edit/Paste", "<control>V", EditPasteCallback, 0, NULL},
+  {"/Edit/Cut", "<control>X", (GtkItemFactoryCallback)EditCutCallback, 0, NULL},
+  {"/Edit/Copy", "<control>C", (GtkItemFactoryCallback)EditCopyCallback, 0, NULL},
+  {"/Edit/Paste", "<control>V", (GtkItemFactoryCallback)EditPasteCallback, 0, NULL},
   {"/Edit/sep", NULL, NULL, 0, "<Separator>"},
 #ifdef ENGLISH
-  {"/Edit/_English", NULL, LangMenuSelect, menu_english, NULL},
+  {"/Edit/_English", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_english, NULL},
 #endif
 #ifdef SPANISH
-  {"/Edit/S_panish", NULL, LangMenuSelect, menu_spanish, NULL},
+  {"/Edit/S_panish", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_spanish, NULL},
 #endif
 #ifdef GERMAN
-  {"/Edit/_German", NULL, LangMenuSelect, menu_german, NULL},
+  {"/Edit/_German", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_german, NULL},
 #endif
 #ifdef SPANISH_LA
-  {"/Edit/_Latin American", NULL, LangMenuSelect, menu_latin_american, NULL},
+  {"/Edit/_Latin American", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_latin_american, NULL},
 #endif
 #ifdef ENGLISH_UK
-  {"/Edit/English U_K", NULL, LangMenuSelect, menu_british, NULL},
+  {"/Edit/English U_K", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_british, NULL},
 #endif
 #ifdef FRENCH
-  {"/Edit/_French", NULL, LangMenuSelect, menu_french, NULL},
+  {"/Edit/_French", NULL, (GtkItemFactoryCallback)LangMenuSelect, menu_french, NULL},
 #endif
   {"/_Help/", NULL, NULL, 0, "<LastBranch>"},
-  {"/Help/_Help on DECtalk", "F1", HelpHelpCallback, 0, NULL},
-  {"/Help/About _GSpeak", "F2", HelpAboutCallback, 0, NULL},
+  {"/Help/_Help on DECtalk", "F1", (GtkItemFactoryCallback)HelpHelpCallback, 0, NULL},
+  {"/Help/About _GSpeak", "F2", (GtkItemFactoryCallback)HelpAboutCallback, 0, NULL},
 };
 #endif //DEMO
 
@@ -2403,7 +2403,7 @@ void ERROR(char *error_message)
 **     None.
 **
 ****************************************************************************/
-void index_callback(long param1, long param2, long user_defined, UINT uiMsg)
+void index_callback(long param1, long param2, DWORD user_defined, UINT uiMsg)
 {
   if (uiMsg == TTS_MSG_STATUS) {
     switch(param1) {
