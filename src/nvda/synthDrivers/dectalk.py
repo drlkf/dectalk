@@ -142,9 +142,8 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 		synthDriverHandler.SynthDriver.RateSetting(),
 		synthDriverHandler.SynthDriver.PitchSetting(),
 		synthDriverHandler.SynthDriver.InflectionSetting(),
-	)
-	if usingWasapiWavePlayer(): supportedSettings+=(synthDriverHandler.SynthDriver.VolumeSetting(),)
-	supportedSettings+=(NumericDriverSetting("spf", _("&SPF"), True, defaultVal=50),
+		synthDriverHandler.SynthDriver.VolumeSetting(),
+		NumericDriverSetting("spf", _("&SPF"), True, defaultVal=100),
 		BooleanDriverSetting("pauses", _("&Shorten pauses"), True, defaultVal=True),
 	)
 	supportedCommands = {
@@ -238,7 +237,7 @@ class SynthDriver(synthDriverHandler.SynthDriver):
 		self.mem_buffer.dwMaximumNumberOfIndexMarks = INDEX_ARRAY_SIZE
 		dectalk.TextToSpeechOpenInMemory(self.handle, FORMAT)
 		dectalk.TextToSpeechAddBuffer(self.handle, byref(self.mem_buffer))
-		self.player = WavePlayer(1, 11025, 16, outputDevice=config.conf["speech"]["outputDevice"])
+		self.player = WavePlayer(1, 11025, 16, outputDevice=config.conf["audio"]["outputDevice"])
 		self.audioQueue = SimpleQueue()  # For audio and indexes.
 		self.audio_thread = BgThread(self.audioQueue)
 		self.audio_thread.start()
