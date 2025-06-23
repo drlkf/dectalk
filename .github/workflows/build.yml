@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update Ubuntu Packages
         run: sudo apt-get update
@@ -41,26 +41,24 @@ jobs:
         run: tar -cvzf dectalk.tar.gz -C dist/ .
 
       - name: Create artifacts (.zip)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ubuntu-latest-zip
           path: dist/
 
       - name: Create artifacts (.tar.gz.zip)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ubuntu-latest-tar
           path: dectalk.tar.gz
 
-          ubuntu:
-
   macosx:
     name: Mac OS X
-    runs-on: macos-11
+    runs-on: macos-13
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update Mac OS X packages
         run: brew update
@@ -84,13 +82,13 @@ jobs:
         run: tar -cvzf dectalk.tar.gz -C dist/ .
 
       - name: Create artifacts (.zip)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos-latest-zip
           path: dist/
 
       - name: Create artifacts (.tar.gz.zip)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos-latest-tar
           path: dectalk.tar.gz
@@ -101,7 +99,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Make DECtalk
         shell: cmd
@@ -112,7 +110,7 @@ jobs:
         run: devops\vs6\dt_copyfiles.bat
 
       - name: Create artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vs6
           path: dist/
@@ -123,7 +121,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
@@ -137,7 +135,7 @@ jobs:
         run: devops\vs2022\dt_copyfiles.bat
 
       - name: Create artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vs2022
           path: dist/
