@@ -23,10 +23,19 @@ ExternalProject_Add(
   COMMAND ${MAKE}
 
   INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/dist
-  COMMAND cp ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/say ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/dectalk-say
 )
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/dectalk-say
+  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/say
   TYPE BIN
+)
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/doc/DECtalk/man/man1/say.1
+  TYPE DOC
+)
+
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/lib/libtts.so
+  TYPE LIB
 )
