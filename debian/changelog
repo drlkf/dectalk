@@ -1,5 +1,72 @@
-dectalk (1.0.0) UNRELEASED; urgency=medium
+dectalk (1.0.0) stable; urgency=medium
 
   * Initial release.
+  * build: add debian files
+  * Merge pull request #76 from Aidenkrz/patch-1
+  * Update pages.yml
+  * Merge pull request #75 from akse0435/version-speak-fix
+  * Changed spelling from "hear" back to "here" as requested
+  * Fixed spoken text when using the version speak command.
+  * Merge pull request #73 from RetroBunn/develop
+  * Merge pull request #74 from yellowberryHN/develop
+  * Update actions build.yml
+  * NVDA: Update files for 2025.1 compatibility
+  * gtk2 samples: fix compilation with gcc 15
+  * More gcc 15 fixes
+  * linux_audio: try to fix compilation with gcc 15
+  * Merge pull request #70 from C0atRack/develop
+  * Incrase the Ph1 and Ph2 buffers to also prevent another buffer
+    overflow in french DT.
+  * Fix buffer overflow in f_fr_ru1.c in french DECTalk when attempting
+    to store a word into the precedent that is larger than the 80 byte
+    limit. The maximum length of the str that enters was experimentally
+    determined to be 127, so changes all values to 128.
+  * Merge pull request #69 from ByteSizedFox/develop
+  * formatting adjustment
+  * minor requested documentation change
+  * playtone: apply software volume on tones/dtmf
+  * say(unix): improve clause mode, clean-up typing mode
+  * configure.ac: make it possible to disable pulseaudio
+  * configure: use $CC as dictionary compiler by default
+  * Merge pull request #64 from barracuda156/darwin
+  * Merge pull request #66 from barracuda156/playaud
+  * playaud.c: remove unneeded cast
+  * Add some missing headers for macOS
+  * lsw_main: add dyld-include on apple systems
+  * Merge pull request #59 from barracuda156/types
+  * Fix compilation with gcc 14
+  * lsw_main: add a missing header
+  * Merge pull request #52 from mohd-akram/fix-macos-speak
+  * Fix building gspeak on macOS
+  * configure: remove generated autoconf files
+  * Merge pull request #57 from C0atRack/PlayCommandFix
+  * Merge pull request #55 from mohd-akram/fix-macos-libtts-linking
+  * Merge pull request #54 from mohd-akram/fix-macos-windic
+  * Merge pull request #53 from mohd-akram/fix-windic-help
+  * Merge pull request #47 from readmemyrights/manpage-fixes
+  * Update cmd_wav.c to prevent a crash when running the :play command
+    without arguments
+  * Fix linking of libtts_*.so files on macOS
+  * Fix Windic resource paths on macOS
+  * Fix Windic help
+  * Merge pull request #50 from Brynify/develop
+  * Add compatibility workaround for not being able to import
+    usingWasapiWavePlayer
+  * Set SPF default value to 50
+  * NVDA add-on: Add volume setting
+  * Add shorten pauses setting
+  * Add SPF slider to NVDA add-on.
+  * windict.1: see previous 5 commits
+  * speak.1: same as the other manpages
+  * say.1: make the manpage use modern man syntax
+  * emacspeak.1: fix this manpage as well
+  * dectalk.1: more manpage fixes
+  * aclock.1: use normal man constructs
+  * linux_audio: fix ALSA fragment calculation and decrease latency
+    target
+  * linux-audio: fix indentation, only print ALSA device on trace
+  * For Alsa, use ALSA_DEFAULT if set in the environment
+  * VROM: Add voice rom from dectalk 4.1
+  * VDF: add voice definition from dectalk 4.1
 
- -- drlkf <drlkf@drlkf.net>  Sun, 24 Aug 2025 21:51:46 +0200
+ -- drlkf <drlkf@drlkf.net>  Mon, 25 Aug 2025 03:55:15 +0200
