@@ -29,10 +29,19 @@ ExternalProject_Add(
   INSTALL_COMMAND make install DESTDIR=${CMAKE_CURRENT_BINARY_DIR}/${TARGET_ROOT_DIR}
 )
 
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/DECtalk.conf
+  TYPE SYSCONF
+)
+
 install(DIRECTORY
-  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/include
+  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/include/dtk
   TYPE INCLUDE
 )
+
+#
+# doc
+#
 
 install(DIRECTORY
   ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DOC_DIR}/man/man1
@@ -40,21 +49,48 @@ install(DIRECTORY
   TYPE MAN
 )
 
+#
+# data
+#
+
 install(DIRECTORY
   ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/bitmaps
   ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/dic
   TYPE DATA
 )
 
-install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/DECtalk.conf
-  TYPE SYSCONF
+#
+# lib
+#
+
+set(LIB_FILES
+  tts
+  tts_fr
+  tts_gr
+  tts_la
+  tts_sp
+  tts_uk
+  tts_us
 )
 
-install(DIRECTORY
-  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_LIB_DIR}
+list(TRANSFORM
+  LIB_FILES
+  PREPEND ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_LIB_DIR}/lib
+)
+
+list(TRANSFORM
+  LIB_FILES
+  APPEND .so
+)
+
+install(FILES
+  ${LIB_FILES}
   TYPE LIB
 )
+
+#
+# bin
+#
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_BUILD_DIR}/aclock
