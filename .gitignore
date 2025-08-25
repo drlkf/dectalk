@@ -1,1 +1,9 @@
+obj-*
+build/
 dist/
+debian/.debhelper/
+debian/*debhelper*
+debian/autoreconf.*
+debian/dectalk/
+debian/dectalk.substvars
+debian/files

@@ -6,7 +6,7 @@
 #		is processed by configure to produce Makefile
 # 004 MGS 03/29/2001 Fixed spacing of french builds
 
-#### Start of system configuration section. ####  
+#### Start of system configuration section. ####
 # first run autoconf in this dir the exe configure will pop out.
 # run configure and it will produce all the make files for you
 
@@ -24,7 +24,7 @@ DECTALK_INSTALL_PREFIX?=@prefix@
 # INSTALL_PREFIX is used for the install to ../dist or DECTALK_INSTALL_PREFIX
 INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)
 
-#### End of system configuration section. #### 
+#### End of system configuration section. ####
 
 # When we're doing a regular build, still do an INSTALL but to the "../dist" folder.
 # Otherwise, a regular install will go to the "/opt/dectalk" directory.
@@ -120,82 +120,82 @@ install:: release
 
 english_release:
 	$(MAKE) -f Makefile.sub "LANGUAGE=ENGLISH -DENGLISH_US -DACNA" \
-        "OUTPUT_DIR=$(OS_VERSION)/us/release" "LANG_CODE=us" \
-        "U_LANG_CODE=US" "ML_OUT=release" \
+	"OUTPUT_DIR=$(OS_VERSION)/us/release" "LANG_CODE=us" \
+	"U_LANG_CODE=US" "ML_OUT=release" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/us/release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/release"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/release"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 english_debug:
 	$(MAKE) -f Makefile.sub "LANGUAGE=ENGLISH -DENGLISH_US -DACNA" \
-        "OUTPUT_DIR=$(OS_VERSION)/us/debug" "LANG_CODE=us" \
-        "U_LANG_CODE=US" "ML_OUT=debug" \
+	"OUTPUT_DIR=$(OS_VERSION)/us/debug" "LANG_CODE=us" \
+	"U_LANG_CODE=US" "ML_OUT=debug" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/us/debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/debug"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/debug"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 uk_release:
 	$(MAKE) -f Makefile.sub "LANGUAGE=ENGLISH -DENGLISH_UK" \
-        "OUTPUT_DIR=$(OS_VERSION)/uk/release" "LANG_CODE=uk" \
-        "U_LANG_CODE=UK" "ML_OUT=release" \
+	"OUTPUT_DIR=$(OS_VERSION)/uk/release" "LANG_CODE=uk" \
+	"U_LANG_CODE=UK" "ML_OUT=release" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/uk/release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/release"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/release"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 uk_debug:
 	$(MAKE) -f Makefile.sub "LANGUAGE=ENGLISH -DENGLISH_UK" \
-        "OUTPUT_DIR=$(OS_VERSION)/uk/debug" "LANG_CODE=uk" \
-        "U_LANG_CODE=UK" "ML_OUT=debug" \
+	"OUTPUT_DIR=$(OS_VERSION)/uk/debug" "LANG_CODE=uk" \
+	"U_LANG_CODE=UK" "ML_OUT=debug" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/uk/debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/debug"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/debug"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 spanish_release::
 	$(MAKE) -f Makefile.sub  "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/sp/release" "LANG_CODE=sp" \
-        "U_LANG_CODE=SP" "ML_OUT=release" \
+	"OUTPUT_DIR=$(OS_VERSION)/sp/release" "LANG_CODE=sp" \
+	"U_LANG_CODE=SP" "ML_OUT=release" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/sp/release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/release" \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 spanish_debug::
 	$(MAKE) -f Makefile.sub "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/sp/debug" "LANG_CODE=sp" \
-        "U_LANG_CODE=SP" "ML_OUT=debug" \
+	"OUTPUT_DIR=$(OS_VERSION)/sp/debug" "LANG_CODE=sp" \
+	"U_LANG_CODE=SP" "ML_OUT=debug" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/sp/debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/debug"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/debug"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 german_release::
 	$(MAKE) -f Makefile.sub "LANGUAGE=GERMAN" \
-        "OUTPUT_DIR=$(OS_VERSION)/gr/release" "LANG_CODE=gr" \
-        "U_LANG_CODE=GR" "ML_OUT=release" \
+	"OUTPUT_DIR=$(OS_VERSION)/gr/release" "LANG_CODE=gr" \
+	"U_LANG_CODE=GR" "ML_OUT=release" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/gr/release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/release"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/release"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 german_debug::
 	$(MAKE) -f Makefile.sub "LANGUAGE=GERMAN" \
-        "OUTPUT_DIR=$(OS_VERSION)/gr/debug" "LANG_CODE=gr" \
-        "U_LANG_CODE=GR" "ML_OUT=debug" \
+	"OUTPUT_DIR=$(OS_VERSION)/gr/debug" "LANG_CODE=gr" \
+	"U_LANG_CODE=GR" "ML_OUT=debug" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/gr/debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/debug"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/debug"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 latin_american_release::
 	$(MAKE) -f Makefile.sub "LANGUAGE=SPANISH -DSPANISH_LA" \
-        "OUTPUT_DIR=$(OS_VERSION)/la/release" "LANG_CODE=la" \
-        "U_LANG_CODE=LA" "ML_OUT=release" \
+	"OUTPUT_DIR=$(OS_VERSION)/la/release" "LANG_CODE=la" \
+	"U_LANG_CODE=LA" "ML_OUT=release" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/la/release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/release" \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 latin_american_debug::
 	$(MAKE) -f Makefile.sub "LANGUAGE=SPANISH -DSPANISH_LA" \
-        "OUTPUT_DIR=$(OS_VERSION)/la/debug" "LANG_CODE=la" \
-        "U_LANG_CODE=LA" "ML_OUT=debug" \
+	"OUTPUT_DIR=$(OS_VERSION)/la/debug" "LANG_CODE=la" \
+	"U_LANG_CODE=LA" "ML_OUT=debug" \
 				"DIC_DIR=$(BUILD_DIR)/dic/$(OS_VERSION)/la/debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/debug"  \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/debug"  \
 				"DECTALK_INSTALL_PREFIX=$(DECTALK_INSTALL_PREFIX)"
 
 french_release::
@@ -216,75 +216,75 @@ french_debug::
 
 clean_english_release:
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=ENGLISH -DENGLISH_US" \
-        "OUTPUT_DIR=$(OS_VERSION)/us/release" "LANG_CODE=us" \
-        "U_LANG_CODE=US" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/release" 
+	"OUTPUT_DIR=$(OS_VERSION)/us/release" "LANG_CODE=us" \
+	"U_LANG_CODE=US" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/release"
 
 clean_english_debug:
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=ENGLISH -DENGLISH_US" \
-        "OUTPUT_DIR=$(OS_VERSION)/us/debug" "LANG_CODE=us" \
-        "U_LANG_CODE=US" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/debug" 
+	"OUTPUT_DIR=$(OS_VERSION)/us/debug" "LANG_CODE=us" \
+	"U_LANG_CODE=US" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/us/debug"
 
 clean_uk_release:
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=ENGLISH -DENGLISH_UK" \
-        "OUTPUT_DIR=$(OS_VERSION)/uk/release" "LANG_CODE=uk" \
-        "U_LANG_CODE=UK" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/release" 
+	"OUTPUT_DIR=$(OS_VERSION)/uk/release" "LANG_CODE=uk" \
+	"U_LANG_CODE=UK" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/release"
 
 clean_uk_debug:
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=ENGLISH -DENGLISH_UK" \
-        "OUTPUT_DIR=$(OS_VERSION)/uk/debug" "LANG_CODE=uk" \
-        "U_LANG_CODE=UK" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/debug"
+	"OUTPUT_DIR=$(OS_VERSION)/uk/debug" "LANG_CODE=uk" \
+	"U_LANG_CODE=UK" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/uk/debug"
 
 clean_spanish_release::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/sp/release" "LANG_CODE=sp" \
-        "U_LANG_CODE=SP" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/release"
+	"OUTPUT_DIR=$(OS_VERSION)/sp/release" "LANG_CODE=sp" \
+	"U_LANG_CODE=SP" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/release"
 
 clean_spanish_debug::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/sp/debug" "LANG_CODE=sp" \
-        "U_LANG_CODE=SP" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/debug" 
+	"OUTPUT_DIR=$(OS_VERSION)/sp/debug" "LANG_CODE=sp" \
+	"U_LANG_CODE=SP" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/sp/debug"
 
 clean_german_release::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=GERMAN" \
-        "OUTPUT_DIR=$(OS_VERSION)/gr/release" "LANG_CODE=gr" \
-        "U_LANG_CODE=GR" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/release" 
+	"OUTPUT_DIR=$(OS_VERSION)/gr/release" "LANG_CODE=gr" \
+	"U_LANG_CODE=GR" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/release"
 
 clean_german_debug::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=GERMAN" \
-        "OUTPUT_DIR=$(OS_VERSION)/gr/debug" "LANG_CODE=gr" \
-        "U_LANG_CODE=GR" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/debug" 
+	"OUTPUT_DIR=$(OS_VERSION)/gr/debug" "LANG_CODE=gr" \
+	"U_LANG_CODE=GR" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/gr/debug"
 
 clean_latin_american_release::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/la/release" "LANG_CODE=la" \
-        "U_LANG_CODE=LA" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/release"
+	"OUTPUT_DIR=$(OS_VERSION)/la/release" "LANG_CODE=la" \
+	"U_LANG_CODE=LA" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/release"
 
 clean_latin_american_debug::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=SPANISH -DSPANISH_SP" \
-        "OUTPUT_DIR=$(OS_VERSION)/la/debug" "LANG_CODE=la" \
-        "U_LANG_CODE=LA" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/debug" 
+	"OUTPUT_DIR=$(OS_VERSION)/la/debug" "LANG_CODE=la" \
+	"U_LANG_CODE=LA" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/la/debug"
 
 clean_french_release::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=FRENCH" \
-        "OUTPUT_DIR=$(OS_VERSION)/fr/release" "LANG_CODE=fr" \
-        "U_LANG_CODE=FR" "ML_OUT=release" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/fr/release"
+	"OUTPUT_DIR=$(OS_VERSION)/fr/release" "LANG_CODE=fr" \
+	"U_LANG_CODE=FR" "ML_OUT=release" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/fr/release"
 
 clean_french_debug::
 	$(MAKE) -f Makefile.sub clean "LANGUAGE=FRENCH" \
-        "OUTPUT_DIR=$(OS_VERSION)/fr/debug" "LANG_CODE=fr" \
-        "U_LANG_CODE=FR" "ML_OUT=debug" \
-        "DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/fr/debug"
+	"OUTPUT_DIR=$(OS_VERSION)/fr/debug" "LANG_CODE=fr" \
+	"U_LANG_CODE=FR" "ML_OUT=debug" \
+	"DT_LIB_DIR=$(BUILD_DIR)/dectalk/$(OS_VERSION)/fr/debug"
 
 clean:: clean_debug clean_release
 

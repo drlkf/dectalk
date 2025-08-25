@@ -1,0 +1,21 @@
+Source: dectalk
+Section: sound
+Priority: optional
+Maintainer: drlkf <drlkf@drlkf.net>
+Build-Depends:
+  build-essential,
+  cmake,
+  dh-cmake,
+  libasound2-dev,
+  libgtk2.0-dev,
+  libpulse-dev,
+  pkg-config,
+  unzip
+
+Package: dectalk
+Description: The venerable text-to-speech utility.
+Architecture: any
+Depends:
+  libasound2,
+  libgtk2.0-dev,
+  libpulse0
