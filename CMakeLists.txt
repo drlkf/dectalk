@@ -4,6 +4,9 @@ project(dectalk CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 set(SRCDIR .)
 set(ORIG_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(TARGET_BUILD_DIR "dist/opt/dectalk")
+set(TARGET_DOC_DIR "${TARGET_BUILD_DIR}/doc/DECtalk")
+set(TARGET_LIB_DIR "${TARGET_BUILD_DIR}/lib")
 
 find_package(PkgConfig)
 pkg_check_modules(ALSA REQUIRED alsa)
@@ -31,11 +34,12 @@ install(FILES
 )
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/doc/DECtalk/man/man1/say.1
-  TYPE DOC
+  ${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DOC_DIR}/man/man1/say.1
+  TYPE MAN
 )
 
 install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/dist/opt/dectalk/lib/libtts.so
+  "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_LIB_DIR}/libtts.so"
+  "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_LIB_DIR}/libtts_us.so"
   TYPE LIB
 )
