@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cd '@CMAKE_INSTALL_FULL_SYSCONFDIR@/@TARGET_CONF_DIR@' && dtk-say "$@"

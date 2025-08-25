@@ -1,0 +1,22 @@
+licenses:@LICENSE_KEY@
+licensepassword:@LICENSE_PASSWORD@
+US_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_us.dic
+UK_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_uk.dic
+SP_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_sp.dic
+GR_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_gr.dic
+LA_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_la.dic
+FR_dict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/dtalk_fr.dic
+US_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_us.dic
+UK_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_uk.dic
+SP_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_sp.dic
+GR_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_gr.dic
+LA_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_la.dic
+FR_udict:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/dic/udict_fr.dic
+Speak_xpm_dir:@CMAKE_INSTALL_FULL_DATADIR@/dectalk/bitmaps/
+Default_lang:us
+LANG:us,US English
+LANG:uk,UK English
+LANG:sp,Spanish
+LANG:gr,German
+LANG:la,Latin American
+LANG:fr,French
